@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloService {
 
-    @CachePut(value = "greeting", key = "#name")
-    public String greeting(String name) {
-        System.out.println("greeting to: " + name);
-        return "Hello, " + name;
+    @CachePut(value = "greeting", key = "#person.firstname")
+    public String greeting(Person person) {
+        System.out.println("greeting to: " + person.getFullname());
+        return "Hello, " + person.getFullname();
     }
 
-    @CacheEvict(value = "greeting", key = "#name")
-    public String goodbye(String name) {
-        System.out.println("goodbye to: " + name);
-        return "Goodbye, " + name;
+    @CacheEvict(value = "greeting", key = "#person.firstname")
+    public String goodbye(Person person) {
+        System.out.println("goodbye to: " + person.getFullname());
+        return "Goodbye, " + person.getFullname();
     }
 }

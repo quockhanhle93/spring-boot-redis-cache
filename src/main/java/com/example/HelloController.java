@@ -14,13 +14,19 @@ public class HelloController {
     @Autowired
     private HelloService service;
 
-    @RequestMapping("/hello/{name}")
-    public String hello(@PathVariable String name) {
-        return service.greeting(name);
+    @RequestMapping("/hello/{firstname}/{lastname}")
+    public String hello(
+            @PathVariable String firstname,
+            @PathVariable String lastname
+    ) {
+        return service.greeting(new Person(firstname, lastname));
     }
 
-    @RequestMapping("/bye/{name}")
-    public String goodbye(@PathVariable String name) {
-        return service.goodbye(name);
+    @RequestMapping("/bye/{firstname}/{lastname}")
+    public String goodbye(
+            @PathVariable String firstname,
+            @PathVariable String lastname
+    ) {
+        return service.goodbye(new Person(firstname, lastname));
     }
 }
