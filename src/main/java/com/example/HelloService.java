@@ -1,7 +1,7 @@
 package com.example;
 
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloService {
 
-    @CachePut(value = "greeting", key = "#person.firstname")
+    @Cacheable(value = "greeting", key = "#person.firstname")
     public String greeting(Person person) {
         System.out.println("greeting to: " + person.getFullname());
         return "Hello, " + person.getFullname();
