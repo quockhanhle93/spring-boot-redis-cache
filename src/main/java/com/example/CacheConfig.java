@@ -1,5 +1,6 @@
 package com.example;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -16,13 +17,21 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Configuration
 @EnableCaching
 public class CacheConfig extends CachingConfigurerSupport {
+
+    @Value("${caching.redis.host}")
+    private String host = "localhost";
+
+    @Value("${caching.redis.port}")
+    private int port = 6379;
+
     @Bean
     public JedisConnectionFactory redisConnectionFactory() {
         JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
 
         // Defaults
-        redisConnectionFactory.setHostName("192.168.99.100");
-        redisConnectionFactory.setPort(6379);
+        redisConnectionFactory.setHostName(this.host);
+        redisConnectionFactory.setPort(this.port);
+
         return redisConnectionFactory;
     }
 
