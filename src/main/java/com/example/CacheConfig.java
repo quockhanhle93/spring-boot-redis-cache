@@ -18,11 +18,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 @EnableCaching
 public class CacheConfig extends CachingConfigurerSupport {
 
-    @Value("${caching.redis.host}")
-    private String host = "localhost";
+    @Value("${caching.redis.host:localhost}")
+    private String host;
 
-    @Value("${caching.redis.port}")
-    private int port = 6379;
+    @Value("${caching.redis.port:6379}")
+    private int port;
 
     @Bean
     public JedisConnectionFactory redisConnectionFactory() {
